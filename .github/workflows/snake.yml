@@ -1,14 +1,17 @@
 name: Generate snake
 
 # Katkı grafiğini (dist/output/*.svg) her gün yeniler ve repoya commit eder.
-# NOT 1: Platane/snk checkout YAPMAZ. Önce actions/checkout çalışmalı,
-#        yoksa commit adımı "not a git repository" hatası verir.
-# NOT 2: README görseli depodaki dosyadan göreli yol ile okunduğu için
-#        gh-pages'a ayrıca yayın yapılmıyor.
-# NOT 3: Commit adımı ham git ile yapılıyor; git-auto-commit-action gibi
-#        Node 20 kullanan üçüncü parti action'ları kullanılmıyor.
-# NOT 4: snk sessizce dosya üretmezse "Commit animation" adımı hata verir,
-#        böylece sessizce geçen başarısız bir gün yaşanmaz.
+#
+# Akış neden böyle:
+#  1) checkout          → Platane/snk checkout YAPMAZ, bu yüzden önce şart
+#  2) clear renders     → depodaki yer tutucu SVG'ler silinir; sonra üretilen
+#                         her dosya "yeni" olur, sessiz no-op engellenir
+#  3) snk               → animasyonu üretir
+#  4) collect           → snk çıktıyı farklı bir yere yazdıysa workspace altında
+#                         aranıp dist/output'a kopyalanır
+#  5) commit            → dosya yoksa workflow HATA verir (sessiz yeşil olmaz)
+#
+# gh-pages'a yayın yapılmıyor: README görseli depodaki dosyadan okuyor.
 
 on:
   schedule:
@@ -37,31 +40,46 @@ jobs:
         with:
           persist-credentials: true
 
+      - name: Clear previous renders
+        run: |
+          rm -f dist/output/*.svg
+          echo "--- temizlendikten sonra dist/output ---"
+          ls -la dist/output
+
       - name: Generate snake animation
         uses: Platane/snk@v3
         id: snake-gif
         with:
           github_user_name: ${{ github.repository_owner }}
-          outputs: ${{ github.workspace }}/dist/output
-
-      - name: Diagnose generated files
+          # outputs = üretilecek DOSYA listesi (dizin değil!), her satır bir dosya.
+          # ?palette / ?color_snake / ?color_dots sorgu dizesi ile temaya uyarlandı.
+          outputs: |
+            dist/output/github-contribution-snake.svg?palette=github-dark
+            dist/output/github-contribution-snake-dark.svg?palette=github-dark&color_snake=%23ff0000&color_dots=%231a1a1a,%233d0000,%23800000,%23cc0000,%23ff0000
+      - name: Collect generated animation
         run: |
-          echo "--- dist/output icerigi ---"
-          ls -la dist/output || echo "dist/output YOK"
-          echo "--- uretilen svg sayisi ---"
-          find dist/output -name '*.svg' -type f | wc -l
-          echo "--- git durumu ---"
-          git status --porcelain
+          set -uo pipefail
+          mkdir -p dist/output
+          find "$GITHUB_WORKSPACE" "$RUNNER_TEMP" /tmp -name 'github-contribution-snake*.svg' 2>/dev/null > /tmp/snk-found.txt || true
+          echo "--- bulunan svg dosyalari ---"
+          cat /tmp/snk-found.txt
+          echo "--- bulunan adet ---"
+          wc -l < /tmp/snk-found.txt
+          while IFS= read -r f; do
+            [ -n "$f" ] && cp -f "$f" dist/output/ || true
+          done < /tmp/snk-found.txt
+          echo "--- dist/output son durum ---"
+          ls -la dist/output
 
       - name: Commit animation
         run: |
           set -euo pipefail
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A dist/output
-          if git diff --staged --quiet; then
-            echo "::error::dist/output altında değişiklik yok — snk dosya üretmedi. Önceki 'Diagnose' adımının çıktısına bak."
+          if [ -z "$(find dist/output -name '*.svg' -type f -print -quit)" ]; then
+            echo "::error::snk hiç SVG üretmedi. 'Collect generated animation' adımının çıktısına bak."
             exit 1
           fi
+          git config user.name  "github-actions[bot]"
+          git config user.email  "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A dist/output
           git commit -m "Update snake animation"
           git push
