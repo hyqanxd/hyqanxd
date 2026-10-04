@@ -1,8 +1,12 @@
 name: Generate snake
 
-# Katkı grafiğini (dist/output/*.svg) her gün yeniler.
-# NOT: gh-pages'a ayrıca yayınlama yapılmıyor; README görseli depodaki dosyadan
-# göreli yol ile okuduğu için (./dist/output/...) ek bir yayın adımı gereksiz.
+# Katkı grafiğini (dist/output/*.svg) her gün yeniler ve repoya commit eder.
+# NOT 1: Platane/snk checkout YAPMAZ. git-auto-commit-action "not a git repository"
+#       hatası veriyordu; bu yüzden checkout adımı önce çalıştırılıyor.
+# NOT 2: README görseli depodaki dosyadan göreli yol ile okunduğu için
+#       gh-pages'a ayrıca yayın yapılmıyor.
+# NOT 3: Commit adımı ham git ile yapılıyor; üçüncü parti Node 20 action'ı
+#       (git-auto-commit-action) kullanılmıyor.
 
 on:
   schedule:
@@ -26,14 +30,26 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: true
+
       - name: Generate snake animation
         uses: Platane/snk@v3
         id: snake-gif
         with:
           github_user_name: ${{ github.repository_owner }}
 
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Update snake animation"
-          file_pattern: "*.svg dist/output"
+      - name: Commit animation
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/output
+          if git diff --staged --quiet; then
+            echo "Katkı grafiği değişmemiş, commit atlanıyor."
+          else
+            git commit -m "Update snake animation"
+            git push
+          fi
