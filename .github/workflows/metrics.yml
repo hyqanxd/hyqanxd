@@ -2,6 +2,10 @@ name: Metrics
 
 # GitHub istatistiklerini (assets/metrics.svg) her gün otomatik yeniler.
 # lowlighter/metrics, ürettiği SVG'yi bu depoya kendisi commit eder.
+#
+# Not: Bu profil koyu temalı. metrics varsayılan olarak açık zemin üretir;
+#      extras_css içindeki `svg { background-color: ... }` kartı koyulaştırır,
+#      böylece kart hem açık hem koyu GitHub temasında okunur.
 
 on:
   schedule:
@@ -27,36 +31,38 @@ jobs:
         with:
           # KİŞİSEL ERİŞİM JETONU (CLASSIC PAT) ŞART.
           # Repo kapsamlı GITHUB_TOKEN kullanıcı/aktivite verisini okuyamaz;
-          # fine-grained token da GraphQL'de desteklenmiyor -> action hata verir.
+          # fine-grained token GraphQL'de desteklenmiyor.
           # Token üretimi ve secret ekleme: KULLANIM.md
           token: ${{ secrets.METRICS_TOKEN }}
           user: ${{ github.repository_owner }}
           filename: assets/metrics.svg
 
-          # panel içeriği
-          base: header, activity, community, repositories, metadata
+          # panel içeriği (istatistik özeti + diller + takvim)
+          base: header, community, repositories, metadata
 
-          # eklentiler
+          # açıkça istenen eklentiler
           plugin_calendar: yes
           plugin_calendar_limit: 1
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
           plugin_languages: yes
           plugin_languages_limit: 8
-          plugin_lines: yes
-          plugin_lines_sections: additions, deletions, current
-          plugin_habits: yes
-          plugin_habits_days: 30
-          plugin_activity: yes
-          plugin_activity_limit: 20
-          plugin_activity_timestamps: no
-          plugin_repositories: yes
-          plugin_repositories_pinned: yes
-          plugin_repositories_order: updated-desc
-          plugin_sponsors: yes
 
-          # AniTilky teması: kırmızı başlıklar ve kırmızı ikonlar
+          # kapalı eklentiler — "Unexpected error" satırı üretmemeleri için:
+          #   plugin_habits / plugin_activity  -> classic token yetkisiz
+          #   plugin_repositories             -> proje adlarını profilde göstermek istemiyoruz
+          #   plugin_isocalendar              -> takvim zaten var (tekrar ediyordu)
+          #   plugin_lines / plugin_sponsors   -> içerik üretmiyor
+          plugin_habits: no
+          plugin_activity: no
+          plugin_repositories: no
+          plugin_isocalendar: no
+          plugin_lines: no
+          plugin_sponsors: no
+
+          # AniTilky teması: koyu kart zemini + kırmızı başlık ve ikonlar
           extras_css: |
+            svg {
+              background-color: #0D1117;
+            }
             h1, h2, h3 {
               color: #FF0000 !important;
             }
@@ -70,7 +76,7 @@ jobs:
           # takvim hücrelerini yeşil ölçek yerine kırmızı ısı skalasına çevirir
           extras_js: |
             for (const [from, to] of [
-              ["#ebedf0", "#1a1a1a"],
+              ["#ebedf0", "#161b22"],
               ["#9be9a8", "#4a0000"],
               ["#40c463", "#a30000"],
               ["#30a14e", "#d40000"],
