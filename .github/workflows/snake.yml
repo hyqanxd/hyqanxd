@@ -1,12 +1,14 @@
 name: Generate snake
 
 # Katkı grafiğini (dist/output/*.svg) her gün yeniler ve repoya commit eder.
-# NOT 1: Platane/snk checkout YAPMAZ. git-auto-commit-action "not a git repository"
-#       hatası veriyordu; bu yüzden checkout adımı önce çalıştırılıyor.
+# NOT 1: Platane/snk checkout YAPMAZ. Önce actions/checkout çalışmalı,
+#        yoksa commit adımı "not a git repository" hatası verir.
 # NOT 2: README görseli depodaki dosyadan göreli yol ile okunduğu için
-#       gh-pages'a ayrıca yayın yapılmıyor.
-# NOT 3: Commit adımı ham git ile yapılıyor; üçüncü parti Node 20 action'ı
-#       (git-auto-commit-action) kullanılmıyor.
+#        gh-pages'a ayrıca yayın yapılmıyor.
+# NOT 3: Commit adımı ham git ile yapılıyor; git-auto-commit-action gibi
+#        Node 20 kullanan üçüncü parti action'ları kullanılmıyor.
+# NOT 4: snk sessizce dosya üretmezse "Commit animation" adımı hata verir,
+#        böylece sessizce geçen başarısız bir gün yaşanmaz.
 
 on:
   schedule:
@@ -40,16 +42,26 @@ jobs:
         id: snake-gif
         with:
           github_user_name: ${{ github.repository_owner }}
+          outputs: ${{ github.workspace }}/dist/output
+
+      - name: Diagnose generated files
+        run: |
+          echo "--- dist/output icerigi ---"
+          ls -la dist/output || echo "dist/output YOK"
+          echo "--- uretilen svg sayisi ---"
+          find dist/output -name '*.svg' -type f | wc -l
+          echo "--- git durumu ---"
+          git status --porcelain
 
       - name: Commit animation
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist/output
+          git add -A dist/output
           if git diff --staged --quiet; then
-            echo "Katkı grafiği değişmemiş, commit atlanıyor."
-          else
-            git commit -m "Update snake animation"
-            git push
+            echo "::error::dist/output altında değişiklik yok — snk dosya üretmedi. Önceki 'Diagnose' adımının çıktısına bak."
+            exit 1
           fi
+          git commit -m "Update snake animation"
+          git push
