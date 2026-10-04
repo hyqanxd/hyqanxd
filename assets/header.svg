@@ -48,27 +48,12 @@
   </g>
 
   <!-- kimlik -->
-  <text class="mono" x="90" y="94" font-size="13" letter-spacing="3" fill="#FF0000">// full-stack developer</text>
-  <text class="mono" x="90" y="156" font-size="64" font-weight="700" letter-spacing="3" fill="#FFFFFF">@hyqanxd</text>
-  <rect x="93" y="176" width="286" height="4" rx="2" fill="#FF0000"/>
+  <text class="mono" x="90" y="108" font-size="13" letter-spacing="3" fill="#FF0000">// full-stack developer</text>
+  <text class="mono" x="90" y="172" font-size="66" font-weight="700" letter-spacing="3" fill="#FFFFFF">@hyqanxd</text>
+  <rect x="93" y="194" width="286" height="4" rx="2" fill="#FF0000"/>
 
-  <text class="ui" x="90" y="210" font-size="19" font-weight="600" fill="#E5E5E5">Full-Stack Geliştirici</text>
-  <text class="ui" x="90" y="236" font-size="15" fill="#E5E5E5" fill-opacity="0.66">Anime ve Manga Platformunun Kurucusu</text>
-
-  <!-- yigin rozetleri -->
-  <g fill="#FFFFFF" fill-opacity="0.05" stroke="#FFFFFF" stroke-opacity="0.14">
-    <rect x="90" y="256" width="66" height="26" rx="13"/>
-    <rect x="164" y="256" width="80" height="26" rx="13"/>
-    <rect x="252" y="256" width="104" height="26" rx="13"/>
-    <rect x="364" y="256" width="84" height="26" rx="13"/>
-  </g>
-  <g class="mono" font-size="11.5" fill="#E5E5E5" text-anchor="middle">
-    <text x="123" y="273">React</text>
-    <text x="204" y="273">Node.js</text>
-    <text x="304" y="273">PostgreSQL</text>
-    <text x="406" y="273">Docker</text>
-  </g>
-  <text class="mono" x="90" y="308" font-size="11.5" letter-spacing="1" fill="#E5E5E5" fill-opacity="0.45">Vercel · Railway · Supabase · CDN</text>
+  <text class="ui" x="90" y="230" font-size="19" font-weight="600" fill="#E5E5E5">Full-Stack Geliştirici</text>
+  <text class="ui" x="90" y="258" font-size="15" fill="#E5E5E5" fill-opacity="0.66">Anime ve Manga Platformunun Kurucusu</text>
 
   <!-- sag taraf: kurumsal bilgi kartlari -->
   <g>
