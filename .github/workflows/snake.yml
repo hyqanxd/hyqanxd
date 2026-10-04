@@ -1,10 +1,12 @@
 name: Generate snake
 
-# Katkı grafiğini (dist/output/*.svg) her gun yeniler.
+# Katkı grafiğini (dist/output/*.svg) her gün yeniler.
+# NOT: gh-pages'a ayrıca yayınlama yapılmıyor; README görseli depodaki dosyadan
+# göreli yol ile okuduğu için (./dist/output/...) ek bir yayın adımı gereksiz.
 
 on:
   schedule:
-    - cron: "23 3 * * *" # her gun 03:23 UTC
+    - cron: "23 3 * * *" # her gün 03:23 UTC
   workflow_dispatch:
   push:
     branches: ["main"]
@@ -21,7 +23,7 @@ concurrency:
 
 jobs:
   generate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Generate snake animation
@@ -29,13 +31,6 @@ jobs:
         id: snake-gif
         with:
           github_user_name: ${{ github.repository_owner }}
-
-      - name: Store snake animation on gh-pages
-        uses: crazy-max/ghaction-github-pages@v4
-        with:
-          target_branch: main
-          build_dir: dist/output
-          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
