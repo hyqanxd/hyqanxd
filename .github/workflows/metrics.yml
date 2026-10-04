@@ -1,0 +1,77 @@
+name: Metrics
+
+# GitHub istatistiklerini (assets/metrics.svg) her gun otomatik yeniler.
+# Not: lowlighter/metrics kendi dosyasini bu depoya commit eder.
+
+on:
+  schedule:
+    - cron: "17 3 * * *" # her gun 03:17 UTC (tam saat degil, GitHub kuyrugunu bosaltmak icin)
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: metrics
+  cancel-in-progress: false
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Generate metrics
+        uses: lowlighter/metrics@latest
+        with:
+          # Kisisel erisim jetonu (PAT) onerilir: repo kapsamli GITHUB_TOKEN kullanici
+          # verisini okuyamaz. Secret olusturma: KULLANIM.md
+          token: ${{ secrets.METRICS_TOKEN || github.token }}
+          user: ${{ github.repository_owner }}
+          filename: assets/metrics.svg
+
+          # panel icerigi
+          base: header, activity, community, repositories, metadata
+
+          # eklentiler
+          plugin_calendar: yes
+          plugin_calendar_limit: 1
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+          plugin_languages: yes
+          plugin_languages_limit: 8
+          plugin_lines: yes
+          plugin_lines_sections: additions, deletions, current
+          plugin_habits: yes
+          plugin_habits_days: 30
+          plugin_activity: yes
+          plugin_activity_limit: 20
+          plugin_activity_timestamps: no
+          plugin_repositories: yes
+          plugin_repositories_pinned: yes
+          plugin_repositories_order: updated-desc
+          plugin_sponsors: yes
+
+          # AniTilky temasi: kirmizi basliklar, kirmizi ikonlar
+          extras_css: |
+            h1, h2, h3 {
+              color: #FF0000 !important;
+            }
+            .field {
+              color: #E5E5E5;
+            }
+            .field svg {
+              fill: #FF0000;
+            }
+
+          # takvim hücrelerini yesil olcek yerine kirmizi isi skalasina cevirir
+          extras_js: |
+            for (const [from, to] of [
+              ["#ebedf0", "#1a1a1a"],
+              ["#9be9a8", "#4a0000"],
+              ["#40c463", "#a30000"],
+              ["#30a14e", "#d40000"],
+              ["#216e39", "#ff0000"],
+            ])
+              document.querySelectorAll(`svg g [fill="${from}"]`).forEach(node => node.setAttribute("fill", to))

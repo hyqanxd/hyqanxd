@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Profil banner - kirmizi/siyah AniTilky esintili tema, AniTilky logosu KULLANILMAZ.
+  Renk kaynaklari (frontend src/App.jsx + src/index.css):
+    #FF0000 primary / #FF4444 gradient / #000000 bg / #0D0D0D surface / #E5E5E5 text
+  Harici font/script KULLANILMAZ (GitHub SVG'yi <img> olarak servis eder).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320" role="img" aria-label="hyqanxd - Full-Stack Developer">
+  <style>
+    .ui { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+    .glow { animation: glowPulse 4.5s ease-in-out infinite; }
+    .sweep { animation: sweep 7s linear infinite; }
+    @keyframes glowPulse { 0%,100% { opacity: .14; } 50% { opacity: .32; } }
+    @keyframes sweep { from { transform: translateX(-260px); } to { transform: translateX(1460px); } }
+  </style>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF4444"/>
+      <stop offset="100%" stop-color="#FF0000"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FF0000" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#FF0000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0 L0 0 0 48" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="320" fill="#000000"/>
+  <rect width="1200" height="320" fill="url(#grid)"/>
+  <ellipse class="glow" cx="180" cy="130" rx="520" ry="270" fill="url(#halo)"/>
+  <rect class="sweep" x="0" y="0" width="180" height="320" fill="url(#sheen)"/>
+
+  <!-- kimlik -->
+  <text class="mono" x="90" y="150" font-size="72" font-weight="700" letter-spacing="3" fill="#FFFFFF">@hyqanxd</text>
+  <rect x="93" y="172" width="300" height="4" rx="2" fill="#FF0000"/>
+  <text class="ui" x="90" y="212" font-size="19" font-weight="600" fill="#E5E5E5">Full-Stack Geliştirici</text>
+  <text class="ui" x="90" y="242" font-size="15" fill="#E5E5E5" fill-opacity="0.66">React · Node.js · PostgreSQL · Docker</text>
+  <text class="ui" x="90" y="268" font-size="15" fill="#E5E5E5" fill-opacity="0.66">Anime ve Manga Platformunun Kurucusu</text>
+
+  <!-- sag taraf: kurumsal bilgi kartlari -->
+  <g>
+    <rect x="838" y="90" width="304" height="74" rx="10" fill="#101010" stroke="#FFFFFF" stroke-opacity="0.10"/>
+    <rect x="838" y="90" width="304" height="3" rx="1.5" fill="url(#brand)"/>
+    <text class="ui" x="862" y="122" font-size="10.5" letter-spacing="2.6" fill="#9a9a9a" font-weight="700">UYGULAMA</text>
+    <text class="mono" x="862" y="148" font-size="17" fill="#FFFFFF">anitilky.com</text>
+  </g>
+  <g>
+    <rect x="838" y="182" width="304" height="74" rx="10" fill="#101010" stroke="#FFFFFF" stroke-opacity="0.10"/>
+    <rect x="838" y="182" width="304" height="3" rx="1.5" fill="url(#brand)"/>
+    <text class="ui" x="862" y="214" font-size="10.5" letter-spacing="2.6" fill="#9a9a9a" font-weight="700">TOPLULUK</text>
+    <text class="mono" x="862" y="240" font-size="15" fill="#E5E5E5">discord.gg/ncp623cWwr</text>
+  </g>
+
+  <!-- alt kenar -->
+  <rect x="0" y="315" width="1200" height="5" fill="url(#brand)" fill-opacity="0.75"/>
+</svg>

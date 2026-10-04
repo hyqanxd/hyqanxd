@@ -1,0 +1,44 @@
+name: Generate snake
+
+# Katkı grafiğini (dist/output/*.svg) her gun yeniler.
+
+on:
+  schedule:
+    - cron: "23 3 * * *" # her gun 03:23 UTC
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "dist/output/**"
+      - ".github/workflows/snake.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snake
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Generate snake animation
+        uses: Platane/snk@v3
+        id: snake-gif
+        with:
+          github_user_name: ${{ github.repository_owner }}
+
+      - name: Store snake animation on gh-pages
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: main
+          build_dir: dist/output
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update snake animation"
+          file_pattern: "*.svg dist/output"

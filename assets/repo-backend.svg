@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Backend proje karti - kurumsal kart sistemi (assets/header.svg ile ayni) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 236" width="480" height="236" role="img" aria-label="Backend projesi">
+  <style>
+    .ui { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+    .lbl { font-size: 10.5px; letter-spacing: 2.6px; fill: #9a9a9a; font-weight: 700; }
+    .body { font-size: 11.5px; fill: #E5E5E5; fill-opacity: 0.66; }
+    .chip { fill: rgba(255,255,255,0.04); stroke: rgba(255,255,255,0.14); }
+    .chiptext { font-size: 11px; fill: #E5E5E5; fill-opacity: 0.85; }
+  </style>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF4444"/>
+      <stop offset="100%" stop-color="#FF0000"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="480" height="236" rx="12" fill="#101010" stroke="#FFFFFF" stroke-opacity="0.10"/>
+  <rect x="1" y="1" width="478" height="3" rx="1.5" fill="url(#brand)"/>
+
+  <text class="ui lbl" x="24" y="40">KAPALI KAYNAK PROJE</text>
+  <text class="ui" x="24" y="76" font-size="26" font-weight="800" fill="#FFFFFF">Backend</text>
+  <text class="ui" x="24" y="102" font-size="12" fill="#FF0000">Node API · Docker · Railway</text>
+
+  <line x1="24" y1="120" x2="456" y2="120" stroke="#FFFFFF" stroke-opacity="0.08"/>
+
+  <text class="ui body" x="24" y="146">17 route · 18 model · 8 servis, JWT + rol,</text>
+  <text class="ui body" x="24" y="164">moderasyon, bakım modu ve yönetim paneli.</text>
+
+  <rect class="chip" x="24" y="180" width="63" height="22" rx="11"/>
+  <text class="mono chiptext" x="55.5" y="195" text-anchor="middle">Express</text>
+  <rect class="chip" x="97" y="180" width="82" height="22" rx="11"/>
+  <text class="mono chiptext" x="138" y="195" text-anchor="middle">Playwright</text>
+  <rect class="chip" x="189" y="180" width="70" height="22" rx="11"/>
+  <text class="mono chiptext" x="224" y="195" text-anchor="middle">Supabase</text>
+  <rect class="chip" x="269" y="180" width="82" height="22" rx="11"/>
+  <text class="mono chiptext" x="310" y="195" text-anchor="middle">Discord.js</text>
+
+  <rect class="chip" x="24" y="208" width="57" height="22" rx="11"/>
+  <text class="mono chiptext" x="52.5" y="223" text-anchor="middle">FFmpeg</text>
+  <rect class="chip" x="91" y="208" width="82" height="22" rx="11"/>
+  <text class="mono chiptext" x="132" y="223" text-anchor="middle">PostgreSQL</text>
+  <rect class="chip" x="183" y="208" width="63" height="22" rx="11"/>
+  <text class="mono chiptext" x="214.5" y="223" text-anchor="middle">CDN</text>
+  <rect class="chip" x="256" y="208" width="82" height="22" rx="11"/>
+  <text class="mono chiptext" x="297" y="223" text-anchor="middle">JWT · bcrypt</text>
+</svg>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Frontend proje karti - kurumsal kart sistemi (assets/header.svg ile ayni) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 236" width="480" height="236" role="img" aria-label="Frontend projesi">
+  <style>
+    .ui { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+    .lbl { font-size: 10.5px; letter-spacing: 2.6px; fill: #9a9a9a; font-weight: 700; }
+    .body { font-size: 11.5px; fill: #E5E5E5; fill-opacity: 0.66; }
+    .chip { fill: rgba(255,255,255,0.04); stroke: rgba(255,255,255,0.14); }
+    .chiptext { font-size: 11px; fill: #E5E5E5; fill-opacity: 0.85; }
+  </style>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF4444"/>
+      <stop offset="100%" stop-color="#FF0000"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="480" height="236" rx="12" fill="#101010" stroke="#FFFFFF" stroke-opacity="0.10"/>
+  <rect x="1" y="1" width="478" height="3" rx="1.5" fill="url(#brand)"/>
+
+  <text class="ui lbl" x="24" y="40">KAPALI KAYNAK PROJE</text>
+  <text class="ui" x="24" y="76" font-size="26" font-weight="800" fill="#FFFFFF">Frontend</text>
+  <text class="ui" x="24" y="102" font-size="12" fill="#FF0000">React SPA · Vercel</text>
+
+  <line x1="24" y1="120" x2="456" y2="120" stroke="#FFFFFF" stroke-opacity="0.08"/>
+
+  <text class="ui body" x="24" y="146">Anime ve manga platformunun arayüzü,</text>
+  <text class="ui body" x="24" y="164">oynatıcı, profiller ve manga okuyucu.</text>
+
+  <rect class="chip" x="24" y="180" width="51" height="22" rx="11"/>
+  <text class="mono chiptext" x="49.5" y="195" text-anchor="middle">React</text>
+  <rect class="chip" x="85" y="180" width="88" height="22" rx="11"/>
+  <text class="mono chiptext" x="129" y="195" text-anchor="middle">Material UI</text>
+  <rect class="chip" x="183" y="180" width="101" height="22" rx="11"/>
+  <text class="mono chiptext" x="233.5" y="195" text-anchor="middle">framer-motion</text>
+  <rect class="chip" x="294" y="180" width="45" height="22" rx="11"/>
+  <text class="mono chiptext" x="316.5" y="195" text-anchor="middle">Plyr</text>
+
+  <rect class="chip" x="24" y="208" width="51" height="22" rx="11"/>
+  <text class="mono chiptext" x="49.5" y="223" text-anchor="middle">axios</text>
+  <rect class="chip" x="85" y="208" width="70" height="22" rx="11"/>
+  <text class="mono chiptext" x="120" y="223" text-anchor="middle">Supabase</text>
+  <rect class="chip" x="165" y="208" width="92" height="22" rx="11"/>
+  <text class="mono chiptext" x="211" y="223" text-anchor="middle">react-router</text>
+</svg>

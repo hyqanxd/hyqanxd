@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AniTilky veri akisi diyagrami - kurumsal kart sistemi (assets/header.svg ile ayni).
+  Kaynaklar: anitilky-supabase-frontend-2026/src/config/axios.js,
+  anitilky-supabase-backend-2026/index.js + routes/ + services/ + utils/
+  Scraper kaynak sitelerinin adlari bilerek gizlenmistir.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 524" width="1000" height="524" role="img" aria-label="AniTilky veri akisi diyagrami">
+  <style>
+    .ui { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+    .box { fill: #101010; stroke: #FFFFFF; stroke-opacity: 0.10; }
+    .box-a { fill: #101010; stroke: #FF0000; stroke-opacity: 0.45; }
+    .lbl { font-size: 10.5px; letter-spacing: 2.6px; fill: #9a9a9a; font-weight: 700; }
+    .t1 { font-size: 14px; font-weight: 700; fill: #FFFFFF; }
+    .t2 { font-size: 11.5px; fill: #E5E5E5; fill-opacity: 0.66; }
+    .flow { stroke: rgba(255,255,255,0.28); stroke-width: 1.4; fill: none; }
+    .flowr { stroke: rgba(255,0,0,0.65); stroke-width: 1.4; fill: none; }
+  </style>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF4444"/>
+      <stop offset="100%" stop-color="#FF0000"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(255,255,255,0.42)"/>
+    </marker>
+    <marker id="arrowr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(255,0,0,0.85)"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="524" fill="#000000"/>
+  <rect x="14" y="14" width="972" height="496" rx="16" fill="none" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <rect x="14" y="14" width="972" height="3" rx="1.5" fill="url(#brand)"/>
+
+  <text class="mono" x="42" y="56" font-size="18" font-weight="700" fill="#FFFFFF">@hyqanxd</text>
+  <text class="ui" x="152" y="56" font-size="13" fill="#E5E5E5" fill-opacity="0.55">AniTilky — veri nereden geliyor?</text>
+  <rect x="42" y="68" width="916" height="2" fill="#FF0000" fill-opacity="0.45"/>
+
+  <!-- 1 · CLIENT -->
+  <rect class="box" x="42" y="104" width="228" height="400" rx="12"/>
+  <rect x="43" y="105" width="226" height="3" rx="1.5" fill="url(#brand)"/>
+  <text class="ui lbl" x="60" y="134">1 · CLIENT</text>
+  <text class="ui t1" x="60" y="160">React 18 SPA</text>
+  <text class="ui t2" x="60" y="184">CRA · MUI · framer-motion</text>
+  <text class="ui t2" x="60" y="206">Tek axios istemcisi → /api</text>
+  <text class="mono t2" x="60" y="232">api.anitilky.com/api</text>
+  <text class="mono t2" x="60" y="254">JWT · localStorage</text>
+  <line x1="60" y1="278" x2="252" y2="278" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <text class="ui t2" x="60" y="302">Vercel CDN + edge SEO</text>
+  <text class="ui t2" x="60" y="324">Plyr oynatıcı · TR altyazı</text>
+  <text class="ui t2" x="60" y="346">Sayfalama · arama · filtre</text>
+  <text class="ui t2" x="60" y="368">Favori / izleme listesi</text>
+  <line x1="60" y1="390" x2="252" y2="390" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <text class="ui t2" x="60" y="414">SEO: Helmet + JSON-LD</text>
+  <text class="ui t2" x="60" y="436">Bakım modu yönlendirmesi</text>
+  <line x1="60" y1="458" x2="252" y2="458" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <text class="ui t2" x="60" y="482">Responsive · mobil uyum</text>
+
+  <!-- 2 · API -->
+  <rect class="box-a" x="342" y="104" width="266" height="400" rx="12"/>
+  <rect x="343" y="105" width="264" height="3" rx="1.5" fill="url(#brand)"/>
+  <text class="ui lbl" x="360" y="134">2 · API</text>
+  <text class="ui t1" x="360" y="160">Node.js 22 · Express</text>
+  <text class="ui t2" x="360" y="184">17 route · 18 model · 8 servis</text>
+  <text class="ui t2" x="360" y="206">JWT + rol: admin · uploader</text>
+  <text class="ui t2" x="360" y="228">Docker image → Railway</text>
+  <line x1="360" y1="252" x2="590" y2="252" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <text class="ui t2" x="360" y="276">Bakım modu + sürüm kontrolü</text>
+  <text class="ui t2" x="360" y="298">Presigned yükleme → CDN</text>
+  <text class="ui t2" x="360" y="320">Discord &amp; Spotify OAuth</text>
+  <text class="ui t2" x="360" y="342">BMC webhook + Discord rolleri</text>
+  <line x1="360" y1="366" x2="590" y2="366" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <text class="ui t2" x="360" y="390">Worker: scrape + schedule</text>
+  <text class="ui t2" x="360" y="412">Proxy havuzu</text>
+  <text class="ui t2" x="360" y="434">FFmpeg · medya işleme</text>
+  <line x1="360" y1="456" x2="590" y2="456" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <text class="ui t2" x="360" y="480">CORS: anitilky.com</text>
+
+  <!-- 3 · VERITABANI -->
+  <rect class="box" x="684" y="100" width="274" height="92" rx="12"/>
+  <rect x="685" y="101" width="272" height="3" rx="1.5" fill="url(#brand)"/>
+  <text class="ui lbl" x="702" y="126">3 · VERİTABANI</text>
+  <text class="ui t1" x="702" y="148">Supabase · PostgreSQL</text>
+  <text class="mono t2" x="702" y="168">users · animes · comments · manga</text>
+  <text class="mono t2" x="702" y="186">schedule · donations · reports</text>
+
+  <!-- 4 · SCRAPER WORKER -->
+  <rect class="box" x="684" y="204" width="274" height="112" rx="12"/>
+  <rect x="685" y="205" width="272" height="3" rx="1.5" fill="url(#brand)"/>
+  <text class="ui lbl" x="702" y="230">4 · SCRAPER WORKER</text>
+  <text class="ui t1" x="702" y="252">Playwright + Axios + proxy</text>
+  <text class="mono t2" x="702" y="272">x anime kaynağı · x manga kaynağı</text>
+  <text class="mono t2" x="702" y="290">x metadata API · x takvim API</text>
+  <text class="ui t2" x="702" y="308">Otomatik sezon/bölüm import</text>
+
+  <!-- 5 · MEDYA -->
+  <rect class="box" x="684" y="328" width="274" height="76" rx="12"/>
+  <rect x="685" y="329" width="272" height="3" rx="1.5" fill="url(#brand)"/>
+  <text class="ui lbl" x="702" y="354">5 · MEDYA</text>
+  <text class="ui t1" x="702" y="376">Bunny Storage + CDN</text>
+  <text class="mono t2" x="702" y="396">video · poster · gif · APK</text>
+
+  <!-- 6 · ENTEGRASYON -->
+  <rect class="box" x="684" y="416" width="274" height="88" rx="12"/>
+  <rect x="685" y="417" width="272" height="3" rx="1.5" fill="url(#brand)"/>
+  <text class="ui lbl" x="702" y="442">6 · ENTEGRASYON</text>
+  <text class="ui t1" x="702" y="464">Discord · Spotify</text>
+  <text class="ui t2" x="702" y="484">Buy Me a Coffee · Resend</text>
+  <text class="ui t2" x="702" y="500">Google AdSense · GA4</text>
+
+  <!-- oklar -->
+  <path class="flowr" d="M 270 304 L 336 304" marker-end="url(#arrowr)"/>
+  <path class="flow" d="M 608 180 C 648 180 648 146 678 146" marker-end="url(#arrow)"/>
+  <path class="flow" d="M 608 210 C 648 210 648 260 678 260" marker-end="url(#arrow)"/>
+  <path class="flow" d="M 608 240 C 656 240 650 366 678 366" marker-end="url(#arrow)"/>
+  <path class="flow" d="M 608 270 C 656 270 650 460 678 460" marker-end="url(#arrow)"/>
+  <text class="ui" x="292" y="294" font-size="10" letter-spacing="1" fill="#E5E5E5" fill-opacity="0.5">REST</text>
+</svg>
